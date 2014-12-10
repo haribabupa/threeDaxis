@@ -1,0 +1,25 @@
+{
+  "name": "ThreeDAxis",
+  "version": "0.0.1",
+  "description": "Phonegap app to test Accelerometer from a Mobile Phone or Tab",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haribabupa/threeDaxis.git"
+  },
+  "keywords": [
+    "Accelerometer"
+  ],
+  "author": "Haribabu Pa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haribabupa/threeDaxis/issues"
+  },
+  "homepage": "https://github.com/haribabupa/threeDaxis",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
