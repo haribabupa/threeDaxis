@@ -1,3 +1,6 @@
 #No need of Nodejs Modules
 #Excecute npm install from root to download them.
 node_modules
+
+#Andorid Build can be done on the fly its not needed to be stored on server.
+threedaxis/platforms/android/ant-build

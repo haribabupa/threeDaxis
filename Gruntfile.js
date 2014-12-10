@@ -7,20 +7,35 @@ module.exports=function(grunt){
                 pName:"Hello grunt : <%=pkg.name + ' v' + pkg.version %>"
             }
         },
-        app:{
-            create:{
-                
-            }
-        },
         exec:{
-            echo_forme:{
-                command:'echo HELLO HARI'
-            },
-            echo_cpath:{
-                command:'%CD%'
-            },
             create:{
                 command:'cordova create <%=pkg.name.toLowerCase()%> <%=pkg.base_id + "." + pkg.name%> <%=pkg.name.toLowerCase()%>',
+            },
+            addPlugins:{
+                cwd:'<%=pkg.name.toLowerCase()%>',
+                command:[
+                    'cordova plugin add org.apache.cordova.device-motion',
+                    'echo Plugins Added'
+                ].join('&&')
+            },            
+            prepare:{
+                cwd:'<%=pkg.name.toLowerCase()%>',
+                command:'cordova prepare android'
+            },
+            build:{
+                cwd:'<%=pkg.name.toLowerCase()%>',
+                command:'cordova build android'
+            },
+            install:{
+                cwd:'<%=pkg.name.toLowerCase()%>\\platforms\\android\\ant-build',
+                command:'adb -d install CordovaApp-debug.apk'
+            },
+            destribute:{
+                cwd:'<%=pkg.name.toLowerCase()%>\\platforms\\android\\ant-build',
+                command:[
+                    'echo <%=pkg.destribute%>theApp.apk',
+                    'copy CordovaApp-debug.apk <%=pkg.destribute%>theApp.apk'
+                ].join('&&')
             }
         }
         
@@ -28,8 +43,13 @@ module.exports=function(grunt){
 
     grunt.loadNpmTasks('grunt-exec');
     
-    grunt.registerTask('sayhello', ['exec:echo_forme']);
-    grunt.registerTask('getpath', ['exec:echo_cpath']);
-    grunt.registerTask('create', ['exec:create']);
-    
+    grunt.registerTask('create', [
+        'exec:create',
+        'exec:addPlugins'
+    ]);
+    grunt.registerTask('deploy', [
+        'exec:prepare',
+        'exec:build',
+        'exec:destribute'
+    ]);
 }
